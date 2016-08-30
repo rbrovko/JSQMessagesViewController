@@ -172,6 +172,12 @@
  */
 @property (assign, nonatomic) CGFloat topContentAdditionalInset;
 
+/**
+ *  Specifies whether or not to show label with text all over the chat.
+ *  Mostly used for displaying message of empty chat.
+ */
+@property  BOOL showEmptyChatMessageLabel;
+
 #pragma mark - Class methods
 
 /**

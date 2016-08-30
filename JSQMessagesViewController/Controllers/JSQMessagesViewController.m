@@ -127,6 +127,7 @@ JSQMessagesKeyboardControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
+@property (weak, nonatomic) IBOutlet UILabel *emptyChatMessageLabel;
 
 @property (weak, nonatomic) UIView *snapshotView;
 
@@ -1150,6 +1151,14 @@ JSQMessagesKeyboardControllerDelegate>
                                                                       action:@selector(jsq_handleInteractivePopGestureRecognizer:)];
         self.currentInteractivePopGestureRecognizer = self.navigationController.interactivePopGestureRecognizer;
     }
+}
+
+- (void)setShowEmptyChatMessageLabel:(BOOL)showEmptyChatMessageLabel {
+    self.emptyChatMessageLabel.hidden = !showEmptyChatMessageLabel;
+}
+
+- (BOOL)showEmptyChatMessageLabel {
+    return !self.emptyChatMessageLabel.hidden;
 }
 
 @end
