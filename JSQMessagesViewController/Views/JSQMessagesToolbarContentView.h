@@ -95,6 +95,13 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
 @property (assign, nonatomic) CGFloat rightBarButtonItemWidth;
 
 /**
+ *  Specifies the height of the rightBarButtonItem.
+ *
+ *  @discussion This property modifies the height of the rightBarButtonContainerView.
+ */
+@property (assign, nonatomic) CGFloat rightBarButtonItemHeight;
+
+/**
  *  Specifies the amount of spacing between the content view and the trailing edge of rightBarButtonItem.
  *
  *  @discussion The default value is `8.0f`.

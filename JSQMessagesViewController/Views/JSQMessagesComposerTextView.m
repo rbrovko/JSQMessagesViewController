@@ -34,9 +34,6 @@
     CGFloat cornerRadius = 6.0f;
 
     self.backgroundColor = [UIColor whiteColor];
-    self.layer.borderWidth = 0.5f;
-    self.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.layer.cornerRadius = cornerRadius;
 
     self.scrollIndicatorInsets = UIEdgeInsetsMake(cornerRadius, 0.0f, cornerRadius, 0.0f);
 
@@ -111,6 +108,15 @@
     }
 
     _placeHolderTextColor = placeHolderTextColor;
+    [self setNeedsDisplay];
+}
+
+- (void)setPlaceHolderFont:(UIFont *)placeHolderFont {
+    if ([placeHolderFont isEqual:_placeHolderFont]) {
+        return;
+    }
+    
+    _placeHolderFont = placeHolderFont;
     [self setNeedsDisplay];
 }
 
@@ -209,7 +215,7 @@
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
     paragraphStyle.alignment = self.textAlignment;
 
-    return @{ NSFontAttributeName : self.font,
+    return @{ NSFontAttributeName : self.placeHolderFont ?: self.font,
               NSForegroundColorAttributeName : self.placeHolderTextColor,
               NSParagraphStyleAttributeName : paragraphStyle };
 }

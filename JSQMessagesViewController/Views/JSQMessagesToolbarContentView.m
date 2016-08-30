@@ -32,6 +32,7 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
 
 @property (weak, nonatomic) IBOutlet UIView *rightBarButtonContainerView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightBarButtonContainerViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightBarButtonContainerViewHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftHorizontalSpacingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightHorizontalSpacingConstraint;
@@ -147,6 +148,12 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
     [self setNeedsUpdateConstraints];
 }
 
+- (void)setRightBarButtonItemHeight:(CGFloat)rightBarButtonItemHeight
+{
+    self.rightBarButtonContainerViewHeightConstraint.constant = rightBarButtonItemHeight;
+    [self setNeedsUpdateConstraints];
+}
+
 - (void)setRightContentPadding:(CGFloat)rightContentPadding
 {
     self.rightHorizontalSpacingConstraint.constant = rightContentPadding;
@@ -170,6 +177,12 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
 {
     return self.rightBarButtonContainerViewWidthConstraint.constant;
 }
+
+- (CGFloat)rightBarButtonItemHeight
+{
+    return self.rightBarButtonContainerViewHeightConstraint.constant;
+}
+
 
 - (CGFloat)rightContentPadding
 {

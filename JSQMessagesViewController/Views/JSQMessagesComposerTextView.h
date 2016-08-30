@@ -53,6 +53,11 @@
 @property (strong, nonatomic) UIColor *placeHolderTextColor;
 
 /**
+ *  The font of the place holder text. The default value is `self.font`.
+ */
+@property (strong, nonatomic) UIFont *placeHolderFont;
+
+/**
  *  The object that acts as the paste delegate of the text view.
  */
 @property (weak, nonatomic) id<JSQMessagesComposerTextViewPasteDelegate> pasteDelegate;
