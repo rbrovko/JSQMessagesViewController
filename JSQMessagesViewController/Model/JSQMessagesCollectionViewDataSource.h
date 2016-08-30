@@ -111,6 +111,25 @@
 @optional
 
 /**
+ *  Asks the data source for the message bubble image data for typing indicator in the collectionView.
+ *
+ *  @param collectionView The collection view requesting this information.
+ *
+ *  @return An initialized object that conforms to the `JSQMessageBubbleImageDataSource` protocol. You may return `nil` from this method if you do not
+ *  want the specified item to display a message bubble image.
+ *
+ *  @discussion It is recommended that you utilize `JSQMessagesBubbleImageFactory` to return valid `JSQMessagesBubbleImage` objects.
+ *  However, you may provide your own data source object as long as it conforms to the `JSQMessageBubbleImageDataSource` protocol.
+ *
+ *  @warning Note that providing your own bubble image data source objects may require additional
+ *  configuration of the collectionView layout object, specifically regarding its `messageBubbleTextViewFrameInsets` and `messageBubbleTextViewTextContainerInsets`.
+ *
+ *  @see JSQMessagesBubbleImageFactory.
+ *  @see JSQMessagesCollectionViewFlowLayout.
+ */
+- (id<JSQMessageBubbleImageDataSource>)collectionViewMessageBubbleImageDataForTypingIndicator:(JSQMessagesCollectionView *)collectionView;
+
+/**
  *  Asks the data source for the text to display in the `cellTopLabel` for the specified
  *  message data item at indexPath in the collectionView.
  *

@@ -16,6 +16,8 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+#import "JSQMessagesCollectionViewDataSource.h"
+
 #import "JSQMessagesTypingIndicatorFooterView.h"
 
 #import "JSQMessagesBubbleImageFactory.h"
@@ -88,7 +90,14 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     JSQMessagesBubbleImageFactory *bubbleImageFactory = [[JSQMessagesBubbleImageFactory alloc] init];
     
     if (shouldDisplayOnLeft) {
-        self.bubbleImageView.image = [bubbleImageFactory incomingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
+        if ([collectionView.dataSource respondsToSelector:@selector(collectionViewMessageBubbleImageDataForTypingIndicator:)]) {
+            id<JSQMessagesCollectionViewDataSource> dataSource = (id<JSQMessagesCollectionViewDataSource>)collectionView.dataSource;
+            id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [dataSource collectionViewMessageBubbleImageDataForTypingIndicator:collectionView];
+            self.bubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
+        }
+        else {
+            self.bubbleImageView.image = [bubbleImageFactory incomingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
+        }
         
         CGFloat collectionViewWidth = CGRectGetWidth(collectionView.frame);
         CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);
