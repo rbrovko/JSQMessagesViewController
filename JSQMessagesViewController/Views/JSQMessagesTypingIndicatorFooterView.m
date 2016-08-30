@@ -20,6 +20,8 @@
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 
+#import "JSQMessageAvatarImageDataSource.h"
+
 #import "JSQMessagesBubbleImageFactory.h"
 
 #import "UIImage+JSQMessages.h"
@@ -30,10 +32,7 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 @interface JSQMessagesTypingIndicatorFooterView ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *bubbleImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleImageViewRightHorizontalConstraint;
-
-@property (weak, nonatomic) IBOutlet UIImageView *typingIndicatorImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *typingIndicatorImageViewRightHorizontalConstraint;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 
 @end
 
@@ -62,7 +61,6 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.backgroundColor = [UIColor clearColor];
     self.userInteractionEnabled = NO;
-    self.typingIndicatorImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 #pragma mark - Reusable view
@@ -84,41 +82,18 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     NSParameterAssert(messageBubbleColor != nil);
     NSParameterAssert(collectionView != nil);
     
-    CGFloat bubbleMarginMinimumSpacing = 6.0f;
-    CGFloat indicatorMarginMinimumSpacing = 26.0f;
-    
-    JSQMessagesBubbleImageFactory *bubbleImageFactory = [[JSQMessagesBubbleImageFactory alloc] init];
+    id<JSQMessagesCollectionViewDataSource> dataSource = (id<JSQMessagesCollectionViewDataSource>)collectionView.dataSource;
+    id<JSQMessageAvatarImageDataSource> avatarDataSource = [dataSource collectionViewAvatarImageDataForTypingIndicator:collectionView];
+    self.avatarImageView.image = [avatarDataSource avatarImage];
     
     if (shouldDisplayOnLeft) {
-        if ([collectionView.dataSource respondsToSelector:@selector(collectionViewMessageBubbleImageDataForTypingIndicator:)]) {
-            id<JSQMessagesCollectionViewDataSource> dataSource = (id<JSQMessagesCollectionViewDataSource>)collectionView.dataSource;
-            id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [dataSource collectionViewMessageBubbleImageDataForTypingIndicator:collectionView];
-            self.bubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
-        }
-        else {
-            self.bubbleImageView.image = [bubbleImageFactory incomingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
-        }
-        
-        CGFloat collectionViewWidth = CGRectGetWidth(collectionView.frame);
-        CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);
-        CGFloat indicatorWidth = CGRectGetWidth(self.typingIndicatorImageView.frame);
-        
-        CGFloat bubbleMarginMaximumSpacing = collectionViewWidth - bubbleWidth - bubbleMarginMinimumSpacing;
-        CGFloat indicatorMarginMaximumSpacing = collectionViewWidth - indicatorWidth - indicatorMarginMinimumSpacing;
-        
-        self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
-        self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMaximumSpacing;
+        id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [dataSource collectionViewMessageBubbleImageDataForTypingIndicator:collectionView];
+        self.bubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
     }
     else {
+        JSQMessagesBubbleImageFactory *bubbleImageFactory = [[JSQMessagesBubbleImageFactory alloc] init];
         self.bubbleImageView.image = [bubbleImageFactory outgoingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
-        
-        self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMinimumSpacing;
-        self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMinimumSpacing;
     }
-    
-    [self setNeedsUpdateConstraints];
-    
-    self.typingIndicatorImageView.image = [[UIImage jsq_defaultTypingIndicatorImage] jsq_imageMaskedWithColor:ellipsisColor];
 }
 
 @end

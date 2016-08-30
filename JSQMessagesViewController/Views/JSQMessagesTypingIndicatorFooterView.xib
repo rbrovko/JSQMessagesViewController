@@ -11,8 +11,25 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
+                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D1j-1k-bw0" userLabel="Avatar container">
+                    <rect key="frame" x="4" y="8" width="30" height="30"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hSd-kK-0it" userLabel="Avatar Image View">
+                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="FyC-KS-ueH"/>
+                        <constraint firstItem="hSd-kK-0it" firstAttribute="leading" secondItem="D1j-1k-bw0" secondAttribute="leading" id="KA3-Wo-tP8"/>
+                        <constraint firstAttribute="trailing" secondItem="hSd-kK-0it" secondAttribute="trailing" id="b3p-Bu-mPu"/>
+                        <constraint firstAttribute="bottom" secondItem="hSd-kK-0it" secondAttribute="bottom" id="ekk-6i-OaQ"/>
+                        <constraint firstItem="hSd-kK-0it" firstAttribute="top" secondItem="D1j-1k-bw0" secondAttribute="top" id="rwq-Rt-sRz"/>
+                        <constraint firstAttribute="height" constant="30" id="yxn-pt-uhh"/>
+                    </constraints>
+                </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z1D-Tr-HPK" userLabel="Bubble Image View">
-                    <rect key="frame" x="25" y="5" width="49" height="35"/>
+                    <rect key="frame" x="36" y="5" width="49" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="365-TI-0fL"/>
                         <constraint firstAttribute="width" constant="49" id="nS4-br-DxL"/>
@@ -21,12 +38,15 @@
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Z1D-Tr-HPK" secondAttribute="bottom" constant="6" id="EVf-Sx-8mX"/>
-                <constraint firstAttribute="trailing" secondItem="Z1D-Tr-HPK" secondAttribute="trailing" constant="246" id="YMl-ej-UZl"/>
+                <constraint firstItem="Z1D-Tr-HPK" firstAttribute="centerY" secondItem="D1j-1k-bw0" secondAttribute="centerY" id="OhO-Cg-dIX"/>
+                <constraint firstItem="D1j-1k-bw0" firstAttribute="leading" secondItem="ajJ-uk-b04" secondAttribute="leading" constant="4" id="PLY-DU-HKt"/>
+                <constraint firstItem="Z1D-Tr-HPK" firstAttribute="leading" secondItem="D1j-1k-bw0" secondAttribute="trailing" constant="2" id="ur1-go-R1s"/>
             </constraints>
             <connections>
+                <outlet property="avatarImageView" destination="hSd-kK-0it" id="1sG-5J-Bz8"/>
                 <outlet property="bubbleImageView" destination="Z1D-Tr-HPK" id="WpE-rP-oYB"/>
-                <outlet property="bubbleImageViewRightHorizontalConstraint" destination="YMl-ej-UZl" id="Thu-7D-dhU"/>
             </connections>
+            <point key="canvasLocation" x="329" y="503"/>
         </collectionReusableView>
     </objects>
 </document>

@@ -108,8 +108,6 @@
  */
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
 
-@optional
-
 /**
  *  Asks the data source for the message bubble image data for typing indicator in the collectionView.
  *
@@ -128,6 +126,24 @@
  *  @see JSQMessagesCollectionViewFlowLayout.
  */
 - (id<JSQMessageBubbleImageDataSource>)collectionViewMessageBubbleImageDataForTypingIndicator:(JSQMessagesCollectionView *)collectionView;
+
+/**
+ *  Asks the data source for the avatar image data for typing indicator in the collectionView.
+ *
+ *  @param collectionView The collection view requesting this information.
+ *
+ *  @return A initialized object that conforms to the `JSQMessageAvatarImageDataSource` protocol. You may return `nil` from this method if you do not want
+ *  the specified item to display an avatar.
+ *
+ *  @discussion It is recommended that you utilize `JSQMessagesAvatarImageFactory` to return valid `JSQMessagesAvatarImage` objects.
+ *  However, you may provide your own data source object as long as it conforms to the `JSQMessageAvatarImageDataSource` protocol.
+ *
+ *  @see JSQMessagesAvatarImageFactory.
+ *  @see JSQMessagesCollectionViewFlowLayout.
+ */
+- (id<JSQMessageAvatarImageDataSource>)collectionViewAvatarImageDataForTypingIndicator:(JSQMessagesCollectionView *)collectionView;
+
+@optional
 
 /**
  *  Asks the data source for the text to display in the `cellTopLabel` for the specified
