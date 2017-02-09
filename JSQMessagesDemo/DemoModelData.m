@@ -134,6 +134,29 @@
     [self addAudioMediaMessage];
     
     /**
+     Testing: Attributed Strings
+     */
+    NSMutableAttributedString* attributedString = [NSMutableAttributedString new];
+    
+    [attributedString appendAttributedString:[[NSAttributedString alloc]
+                                              initWithString:@"Good News!"
+                                              attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:18],
+                                                           NSForegroundColorAttributeName:[UIColor whiteColor]}]];
+    
+    [attributedString appendAttributedString:[[NSAttributedString alloc]
+                                              initWithString:@"\nNow with attributed strings"
+                                              attributes:@{NSFontAttributeName:[UIFont italicSystemFontOfSize:14],
+                                                           NSForegroundColorAttributeName:[UIColor redColor]}]];
+    
+    [self.messages addObject:[[JSQAttributedMessage alloc]initWithSenderId:kJSQDemoAvatarIdCook
+                                                         senderDisplayName:kJSQDemoAvatarDisplayNameCook
+                                                                      date:[NSDate date]
+                                                            attributedText:attributedString]];
+    
+    
+
+    
+    /**
      *  Setting to load extra messages for testing/demo
      */
     if ([NSUserDefaults extraMessagesSetting]) {
