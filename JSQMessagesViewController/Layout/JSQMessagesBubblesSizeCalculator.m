@@ -120,7 +120,7 @@
         CGRect stringRect;
         
         if ([messageData conformsToProtocol:@protocol(JSQMessageAttributedData)] &&
-            [(id <JSQMessageAttributedData> )messageData attributedText]) {
+            [(id <JSQMessageAttributedData> )messageData isUseAttributedText]) {
             id <JSQMessageAttributedData> attributedMessageItem =  (id <JSQMessageAttributedData> )messageData;
             stringRect = [[attributedMessageItem  attributedText] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
                                                                                options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)

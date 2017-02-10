@@ -13,8 +13,14 @@
 /**
  *  @return The body text of the message.
  *
- *  @warning You must not return `nil` from this method.
+ *  @warning You must not return `nil` from this method. Must -isUseAttributedText return YES
  */
 - (NSAttributedString *)attributedText;
+
+/**
+ 
+ @return YES if use attributedText else use text
+ */
+- (BOOL)isUseAttributedText;
 
 @end

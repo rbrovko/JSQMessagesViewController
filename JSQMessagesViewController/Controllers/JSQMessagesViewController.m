@@ -561,7 +561,7 @@ JSQMessagesKeyboardControllerDelegate>
         cell.textView.text = [messageItem text];
         
         if ([messageItem conformsToProtocol:@protocol(JSQMessageAttributedData)] &&
-            [((id <JSQMessageAttributedData>) messageItem) attributedText]) {
+            [(id <JSQMessageAttributedData>)messageItem isUseAttributedText]) {
             id <JSQMessageAttributedData> attributedMessageItem =  (id <JSQMessageAttributedData>) messageItem;
             cell.textView.attributedText = [attributedMessageItem attributedText];
             

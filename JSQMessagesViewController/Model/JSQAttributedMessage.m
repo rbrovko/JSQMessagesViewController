@@ -41,5 +41,10 @@
     return self;
 }
 
+#pragma mark - JSQMessageAttributedData
+
+- (BOOL)isUseAttributedText {
+    return self.attributedText != nil;
+}
 
 @end
