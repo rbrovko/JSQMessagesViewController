@@ -560,7 +560,8 @@ JSQMessagesKeyboardControllerDelegate>
     if (!isMediaMessage) {
         cell.textView.text = [messageItem text];
         
-        if ([messageItem conformsToProtocol:@protocol(JSQMessageAttributedData)]) {
+        if ([messageItem conformsToProtocol:@protocol(JSQMessageAttributedData)] &&
+            [((id <JSQMessageAttributedData>) messageItem) attributedText]) {
             id <JSQMessageAttributedData> attributedMessageItem =  (id <JSQMessageAttributedData>) messageItem;
             cell.textView.attributedText = [attributedMessageItem attributedText];
             
